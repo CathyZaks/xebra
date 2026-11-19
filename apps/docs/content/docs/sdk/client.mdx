@@ -196,7 +196,7 @@ Ask the wallet for each step in order, and wait for each to confirm before the n
 must be included on chain before the `burn` that spends it.
 
 ```ts twoslash
-import type { TransferStep } from "@xebra/sdk/build";
+import type { TransferStep } from "@xebra/sdk";
 declare const steps: TransferStep[];
 declare function signAndSend(step: TransferStep): Promise<string>;
 // ---cut---
