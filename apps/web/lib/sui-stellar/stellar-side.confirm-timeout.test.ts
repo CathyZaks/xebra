@@ -20,6 +20,9 @@ vi.mock("@stellar/stellar-sdk", async (orig) => {
     rpc: {
       ...actual.rpc,
       Server: vi.fn(() => mockServer),
+      // completeBurn simulates the mint and assembles it itself (#163); the fake simulation has no
+      // real transactionData, so hand back a transaction that only needs signing.
+      assembleTransaction: vi.fn(() => ({ build: () => ({ sign: vi.fn() }) })),
     },
   };
 });
