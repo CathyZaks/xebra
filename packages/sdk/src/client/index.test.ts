@@ -154,7 +154,10 @@ describe("waitForDelivery", () => {
     const client = createXebraClient({ fetch: async () => json(200, STATUS("pending")) });
     await expect(
       client.waitForDelivery("stellar", "a".repeat(64), { intervalMs: 5, timeoutMs: 20 }),
-    ).rejects.toMatchObject({ code: "timeout" });
+    ).rejects.toMatchObject({
+      code: "wait_timeout",
+      extra: { lastStatus: "pending" },
+    });
   });
 });
 
